@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
-import { today, next, previous } from "../utils/date-time";
+import { next, previous, today } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import useQuery from '../utils/useQuery';
 import ReservationTable from '../reservations/ReservationTable';
@@ -26,7 +26,7 @@ function Dashboard({ currentDate }) {
   const qDate = query.get('date');
   const [date, setDate] = useState(qDate ? qDate : currentDate)
 
-  const history = useHistory();
+  //const history = useHistory();
 
   //Gets Reservation and Table Info else gives an error
   useEffect(loadDashboard, [date]);
@@ -49,7 +49,7 @@ function Dashboard({ currentDate }) {
 
   const handleDateChange = (value) => {
     setDate(value.target.value);
-    history.push(`/dashboard?date=${value.target.value}`);
+    //history.push(`/dashboard?date=${value.target.value}`);
   }
 
 
@@ -91,7 +91,7 @@ function Dashboard({ currentDate }) {
           {/* Buttons < Today >*/}
 
           <Link to={`/dashboard?date=${previous(date)}`}>
-          <button className=' navbuttons mx-3 oi oi-chevron-left'></button>
+          <button className='navbuttons mx-3 oi oi-chevron-left' onClick={() => setDate(previous(date))}></button>
           </Link>
 
           <Link to={`/dashboard?date=${today()}`}>
