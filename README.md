@@ -284,7 +284,6 @@ so that I know which tables are occupied and free.
    - display a list of all tables, sorted by `table_name`, in another area of the dashboard
      - Each table will display "Free" or "Occupied" depending on whether a reservation is seated at the table.
      - The "Free" or "Occupied" text must have a `data-table-id-status=${table.table_id}` attribute, so it can be found by the tests.
-
 1. The `/reservations/:reservation_id/seat` page will
    - have the following required and not-nullable fields:
      - Table number: `<select name="table_id" />`. The text of each option must be `{table.table_name} - {table.capacity}` so the tests can find the options.
