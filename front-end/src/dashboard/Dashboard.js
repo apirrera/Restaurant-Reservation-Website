@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {  Link } from "react-router-dom";
+import {  useHistory,Link } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
 import { next, previous, today } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
@@ -26,7 +26,7 @@ function Dashboard({ currentDate }) {
   const qDate = query.get('date');
   const [date, setDate] = useState(qDate ? qDate : currentDate)
 
-  //const history = useHistory();
+  const history = useHistory();
 
   //Gets Reservation and Table Info else gives an error
   useEffect(loadDashboard, [date]);
@@ -49,7 +49,7 @@ function Dashboard({ currentDate }) {
 
   const handleDateChange = (value) => {
     setDate(value.target.value);
-    //history.push(`/dashboard?date=${value.target.value}`);
+    history.push(`/dashboard?date=${value.target.value}`);
   }
 
 
