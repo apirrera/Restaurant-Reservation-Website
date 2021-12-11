@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { listReservations, listTables } from "../utils/api";
-import { next, previous } from "../utils/date-time";
+import { today, next, previous } from "../utils/date-time";
 import ErrorAlert from "../layout/ErrorAlert";
 import useQuery from '../utils/useQuery';
 import ReservationTable from '../reservations/ReservationTable';
@@ -25,6 +26,8 @@ function Dashboard({ currentDate }) {
   const qDate = query.get('date');
   const [date, setDate] = useState(qDate ? qDate : currentDate)
 
+  const history = useHistory();
+
   //Gets Reservation and Table Info else gives an error
   useEffect(loadDashboard, [date]);
 
@@ -43,10 +46,12 @@ function Dashboard({ currentDate }) {
     return () => abortController.abort();
   }
 
+
   const handleDateChange = (value) => {
     setDate(value.target.value);
-    // history.push(`/dashboard?date=${e.target.value}`);
+    history.push(`/dashboard?date=${value.target.value}`);
   }
+
 
 //Formats Date
   const formatDate = (date) => {
@@ -84,9 +89,19 @@ function Dashboard({ currentDate }) {
       <input name='date' type='date' className='my-2' value={date} onChange={handleDateChange} />
         <div>
           {/* Buttons < Today >*/}
-          <button className=' navbuttons mx-3 oi oi-chevron-left' onClick={() => setDate(previous(date))}></button>
+
+          <Link to={`/dashboard?date=${previous(date)}`}>
+          <button className=' navbuttons mx-3 oi oi-chevron-left'></button>
+          </Link>
+
+          <Link to={`/dashboard?date=${today()}`}>
           <button className='navbuttons mx-3 btn btn-sm btn-outline' onClick={() => setDate(currentDate)}>Today</button>
+          </Link>
+
+          <Link to={`/dashboard?date=${next(date)}`}>
           <button className='navbuttons mx-3 oi oi-chevron-right' onClick={() => setDate(next(date))}></button>
+          </Link>
+          
         </div>
         {/* States the Date*/}
         <h5 className='text-center rtHead'>{formatDate(date)}</h5>

@@ -177,7 +177,7 @@ async function list(req, res) {
 
   if (date) {
     const data = await service.list(date);
-
+    
     res.json({
       data: data,
     });
