@@ -49,9 +49,9 @@ export default function ReservationSeat() {
     }, [reservation_id]);
 
     //Maps Tables Info
-    const tableOptions = tables.map((table, index) => {
+    const tableOptions = tables.map((table, tablekey) => {
         return (
-            <option key={index} value={table.table_id}>{table.table_name} - {table.capacity}{table.occupied ? ' OCCUPIED' : ''}</option>
+            <option key={tablekey} value={table.table_id}>{table.table_name} - {table.capacity}{table.occupied ? ' OCCUPIED' : ''}</option>
         )
     });
 

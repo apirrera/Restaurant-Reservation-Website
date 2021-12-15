@@ -21,8 +21,8 @@ export default function Edit() {
     //Submit Button that processes Reservation Changes
     const handleSubmit = async (value, reservation) => {
         value.preventDefault();
-
-        const status = await updateReservation(reservation, reservation_id);
+        const abortController = new AbortController();
+        const status = await updateReservation(reservation, reservation_id, abortController);
 
         if (status === 200)
             history.push(`/dashboard?date=${reservation.reservation_date}`);
@@ -33,6 +33,7 @@ export default function Edit() {
     // Sets Reservation Page with Default Values
     useEffect(() => {
         async function fetchReservation() {
+            const abortController = new AbortController();
             const response = await readReservation(reservation_id);
             const fetchedReservation = response.data.data;
 
@@ -40,7 +41,7 @@ export default function Edit() {
             fetchedReservation.reservation_date = fetchedReservation.reservation_date.slice(0, 10);
             fetchedReservation.reservation_time = fetchedReservation.reservation_time.slice(0, 5);
 
-            setOldReservation(fetchedReservation);
+            setOldReservation(fetchedReservation, abortController);
         }
         fetchReservation();
     }, [reservation_id]);

@@ -16,9 +16,9 @@ export default function Search() {
     const [reservationsError, setReservationsError] = useState(null);
 
     //Get ReservationList Component Information
-    const reservationsContent = reservations.map((reservation, index) => {
+    const reservationsContent = reservations.map((reservation, reversationkey) => {
         return (
-            <ReservationList reservation={reservation} key={index} />
+            <ReservationList reservation={reservation} key={reversationkey} />
         )
     });
 

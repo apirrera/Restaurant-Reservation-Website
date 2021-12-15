@@ -10,9 +10,9 @@ import TableList from './TableList';
 export default function Table({ tables }) {
 
     //Seperates table values and sends it to TableList and then returns Table List
-    const tablesList = tables.map((table, index) => {
+    const tablesList = tables.map((table, tableskey) => {
         return (
-          <TableList table={table} key={index} />
+          <TableList table={table} key={tableskey} />
         )
       });
 
