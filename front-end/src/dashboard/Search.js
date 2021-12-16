@@ -34,6 +34,7 @@ export default function Search() {
             .then(setReservations)
             .then(() => reservationsContent.length === 0 ? setReservationsError({ message: 'No reservations found' }) : setReservationsError(null))
             .catch(setReservationsError);
+            return () => abortController.abort();
     }
 
     return (
