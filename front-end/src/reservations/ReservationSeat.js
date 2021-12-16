@@ -39,11 +39,13 @@ export default function ReservationSeat() {
         async function fetchReservation() {
             const response = await readReservation(reservation_id);
             const fetchedReservation = response.data.data;
+            const abortController = new AbortController();
 
             fetchedReservation.reservation_date = fetchedReservation.reservation_date.slice(0, 10);
             fetchedReservation.reservation_time = fetchedReservation.reservation_time.slice(0, 5);
 
-            setReservation(fetchedReservation);
+            setReservation(fetchedReservation, abortController);
+            return () => abortController.abort()
         }
         fetchReservation();
     }, [reservation_id]);

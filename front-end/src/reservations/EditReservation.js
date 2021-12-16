@@ -42,8 +42,9 @@ export default function Edit() {
             fetchedReservation.reservation_time = fetchedReservation.reservation_time.slice(0, 5);
 
             setOldReservation(fetchedReservation, abortController);
+            return () => abortController.abort()
         }
-        fetchReservation();
+       return fetchReservation();
     }, [reservation_id]);
 
     return (
