@@ -23,7 +23,7 @@ export default function NewTable() {
 
     const handleSubmit = (value) => {
         value.preventDefault();
-
+        
         const table = {
             table_name: tableName,
             capacity: Number(capacity),
@@ -33,7 +33,7 @@ export default function NewTable() {
             .then(response => response.status === 201 ? history.push(`/dashboard`) : null)
             .catch(err => {
                 console.error(err.response.data.error)
-                setReservationsError({ message: err.response.data.error })
+                setReservationsError({ message: err.response.data.error})
             }
             );
     }

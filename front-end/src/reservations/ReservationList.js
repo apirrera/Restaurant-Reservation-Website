@@ -8,9 +8,9 @@ function ReservationList({ reservation }) {
 	//Cancel Button on Dashboard to set Reservation to cancelled status
     const handleCancel = async (value) => {
         value.preventDefault();
-    
+		const abortController = new AbortController();
         if (window.confirm('Do you want to cancel this reservation? This cannot be undone.')) {
-            const status = await cancelReservation(reservation.reservation_id);
+            const status = await cancelReservation(reservation.reservation_id,abortController.signal);
     
             if (status === 200)
                 window.location.reload()

@@ -22,7 +22,7 @@ export default function Edit() {
     const handleSubmit = async (value, reservation) => {
         value.preventDefault();
         const abortController = new AbortController();
-        const status = await updateReservation(reservation, reservation_id, abortController);
+        const status = await updateReservation(reservation, reservation_id, abortController.signal);
 
         if (status === 200)
             history.push(`/dashboard?date=${reservation.reservation_date}`);

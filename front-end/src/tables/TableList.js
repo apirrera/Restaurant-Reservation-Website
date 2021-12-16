@@ -8,9 +8,9 @@ function TableList({ table }) {
     //Empties Table for New Guest
     const handleFinish = async (value) => {
         value.preventDefault();
-
+        const abortController = new AbortController();
         if (window.confirm('Is this table ready to seat new guests? This cannot be undone.')) {
-            const status = await finishTable(table.table_id);
+            const status = await finishTable(table.table_id, abortController.signal);
 
             if (status === 200)
                 window.location.reload()

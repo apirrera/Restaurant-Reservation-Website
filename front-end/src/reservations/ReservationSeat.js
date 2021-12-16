@@ -63,8 +63,8 @@ export default function ReservationSeat() {
     //Submit Button processes the changes
     const handleSubmit = async (value) => {
         value.preventDefault();
-
-        const status = await seatReservation(tableId, reservation_id);
+        const abortController = new AbortController();
+        const status = await seatReservation(tableId, reservation_id,abortController.signal);
 
         if (status === 200)
             history.push(`/dashboard?date=${reservation.reservation_date}`);

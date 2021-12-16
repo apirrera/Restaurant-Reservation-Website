@@ -18,8 +18,8 @@ export default function NewReservation() {
     //Submit Button, changes status and sends to custom url based on date else gives error on why form can't submit
     const handleSubmit = async (value, reservation) => {
         value.preventDefault();
-
-        const status = await createReservation(reservation);
+        const abortController = new AbortController();
+        const status = await createReservation(reservation,abortController.signal);
 
         if (status === 'booked')
             history.push(`/dashboard?date=${reservation.reservation_date}`);

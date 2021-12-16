@@ -21,7 +21,7 @@ export default function ReservationForm({ handleSubmit, reservation = {
     
     const handleSubmission = (event) => {
         event.preventDefault();
-
+        const abortController = new AbortController();
         const updatedReservation = {
             first_name: document.querySelector('input[name="first_name"').value,
             last_name: document.querySelector('input[name="last_name"').value,
@@ -32,7 +32,7 @@ export default function ReservationForm({ handleSubmit, reservation = {
             current_time: new Date().toString().slice(16, 21)
         }
 
-        handleSubmit(event, updatedReservation);
+        handleSubmit(event, updatedReservation, abortController.signal);
     }
 
     const handleCancel = (value) => {
